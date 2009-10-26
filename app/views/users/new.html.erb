@@ -1,0 +1,10 @@
+<h1>Register</h1>
+ 
+<% form_for @user do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <p class="create_acct_actions">
+    <%= image_submit_tag 'btn_create_acct.png', :class => 'create_acct_link' %>
+    or
+    <%= link_to 'cancel', root_path %>
+  </p>
+<% end %>

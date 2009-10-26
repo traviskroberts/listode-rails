@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Listode</title>
+	
+	<%= stylesheet_link_tag "screen", "application" %>
+	<%= stylesheet_link_tag "print", :media => "print" %>
+	<%= javascript_include_tag "jquery", "jquery.dimensions.min", "jquery.ahover", "application" %>
+	
+	<link rel="shortcut icon" src="/favicon.ico" />
+	
+	<!--[if IE]>
+	  <%= stylesheet_link_tag "ie" %>
+	<![endif]-->
+	
+	<!--[if IE 6]>
+	  <script type="text/javascript">
+	    alert("Really?!?!  You're using IE 6?  Seriously?\nWell, the site is totally not going to work for you.\n Do yourself a favor and go download Firefox: http://getfirefox.com. Please.");
+	  </script>
+	<![endif]-->
+	
+	<!--[if lt IE 6]>
+	  <script type="text/javascript">
+	    alert("Whoa!!!  You're using a seriously old version of Internet Explorer!\nWell, the site is totally not going to work for you.\n Do yourself a favor and go download Firefox: http://getfirefox.com.  Please.");
+	  </script>
+	<![endif]-->
+	
+</head>
+
+<body>
+  <div id="wrapper" class="container">
+    <div id="header">
+      <%= link_to image_tag('logo.png', :class => 'logolink', :alt => 'logo'), root_path %>
+      
+      <div id="member_nav">
+        <p>
+          <%- if current_user -%>
+            <%= link_to 'My Account', edit_user_path(:current), :class => 'first' %>
+            <%= link_to 'Logout', logout_path, :class => 'last' %>
+          <%- else -%>
+            <%= link_to 'Login', login_path, :class => 'first' %>
+            <%= link_to 'Sign-up', new_user_path, :class => 'last' %>
+          <%- end -%>
+        </p>
+      </div><!-- member_nav -->
+      
+      <div id="nav">
+        <ul>
+          <li><%= link_to 'About', '' %></li>
+          <%- if current_user -%>
+            <li><%= link_to 'Lists', '' %></li>
+          <%- else -%>
+            <li><%= link_to 'Create an Account', new_user_path %></li>
+          <%- end -%>
+          <li><%= link_to 'Feedback', '' %></li>
+          <%- if current_user and current_user.admin -%>
+            <li><%= link_to 'Users', '' %></li>
+          <%- end -%>
+          <div class="clear"></div>
+        </ul>
+      </div><!-- nav -->
+    </div><!-- header -->
+    
+    <%= render :partial => 'shared/notice_div' %>
+    <%= render :partial => 'shared/sub_nav' %>
+    
+    <div id="content" class="span-21<%= @homepage ? ' home' : '' %>">
+      <div id="inner_content">
+        <%= yield %>
+      </div><!-- inner_content -->
+    </div><!-- content -->
+    
+    <div class="clear"></div>
+    
+    <div id="footer" class="span-21">
+      <p>
+        &copy; <%= Date.today.year %> Listode. All rights reserved.
+      </p>
+    </div><!-- footer -->
+  </div><!-- wrapper -->
+  
+  <script type="text/javascipt">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    try {
+      var pageTracker = _gat._getTracker("UA-7374912-1");
+      pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
+</body>
+</html>

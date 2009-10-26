@@ -1,0 +1,21 @@
+<%= f.error_messages %>
+
+<p>
+  <%= f.label :name %>
+  <%= f.text_field :name, :class => 'formfield' %>
+</p>
+
+<p>
+  <%= f.label :email %>
+  <%= f.text_field :email, :class => 'formfield' %>
+</p>
+
+<p>
+  <%= f.label :password, f.object.new_record? ? nil : "Change password" %>
+  <%= f.password_field :password, :class => 'formfield' %>
+</p>
+
+<p>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, :class => 'formfield' %>
+</p>

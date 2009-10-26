@@ -1,0 +1,25 @@
+<div id="login">
+  <% form_for @user_session do |f| %>
+    <%= f.error_messages %>
+
+    <p>
+      <%= f.label :email, 'Email Address' %>
+      <%= f.text_field :email, :class => 'formfield' %>
+    </p>
+
+    <p>
+      <%= f.label :password %>
+      <%= f.password_field :password, :class => 'formfield' %>
+    </p>
+
+    <p>
+      <%= f.check_box :remember_me, :class => 'remember_me' %><%= f.label :remember_me, nil, :class => 'remember_me' %>
+    </p>
+
+    <div class="clear"></div><br />
+
+    <p>
+      <%= image_submit_tag 'btn_login.png', :class => 'btn_login' %>
+    </p>
+  <% end %>
+</div><!-- login -->
