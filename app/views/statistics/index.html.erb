@@ -1,11 +1,22 @@
-<%- if !@tasks.blank? -%>
+<%- if !@month_list.blank? -%>
   <h2>Choose a task to see statistics</h2>
   
   <ul class="stats_list">
-    <%- @tasks.each do |task| -%>
-      <li><%= link_to h(task.title), statistics_detail_path(:id => task, :title => strip_chars(task.title)) %></li>
+    <%- @month_list.cur_ungrouped_lists.each do |list| -%>
+      <li><%= link_to h(list.task.title), statistics_detail_path(:id => list.task, :title => strip_chars(list.task.title)) %></li>
     <%- end -%>
   </ul>
+
+  <%- cur_group = nil -%>
+  <%- @month_list.cur_grouped_lists.each do |list| -%>
+    <%- if list.task.task_group_id != cur_group -%>
+      <h3 class="group_title"><%=h list.task.task_group.title %></h3>
+      <%- cur_group = list.task.task_group_id -%>
+    <%- end -%>
+    <ul class="stats_list">
+      <li><%= link_to h(list.task.title), statistics_detail_path(:id => list.task, :title => strip_chars(list.task.title)) %></li>
+    </ul>
+  <%- end -%>
 <%- else -%>
   <h2>Statistics</h2>
   
