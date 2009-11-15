@@ -1,0 +1,17 @@
+<div class="list_form">
+  <% form_tag(complete_task_list_path(:id => list), :id => "list_details_form_#{list.id}") do %>
+    <p id="notes_<%= list.id %>" style="display:none;">
+      <label for="amount">Amount</label>
+      <%= text_field_tag :amount, '', :id => "amount_field_#{list.id}", :class => 'list_input' %>
+      <label for="notes">Notes</label>
+      <%= text_area_tag :notes, '', :size => '25x5', :id => "note_field_#{list.id}", :class => 'list_input' %>
+      <br />
+      <span class="list_form_controls">
+        <%= image_submit_tag 'btn_mark_complete.png', :alt => 'Mark As Complete', :class => 'mark_complete_button' %>
+        or
+        <%= link_to 'cancel', '#', :onclick => "toggle_list_notes('#{list.id}', 'link'); return false;" %>
+      </span>
+      <div class="clear"></div>
+    </p>
+  <% end %>
+</div>

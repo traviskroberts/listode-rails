@@ -1,0 +1,25 @@
+<p>
+  <%= f.label :title %>
+  <%= f.text_field :title, :class => 'text' %>
+</p>
+
+<p>
+  <span id="task_group_select">
+    <%= f.label :task_group_id, 'Task Group' %>
+    <%= f.select :task_group_id, options_for_select(@task_groups), {:include_blank => true}, :class => 'task_group_select' %>
+    <%= link_to 'add task group', new_task_group_path, :class => 'add_task_link' %>
+  </span>
+  <span id="task_group_form" style="display:none;">
+    <%= label_tag :task_group_title, 'Group Name' %>
+    <%= text_field_tag :task_group_title, '', :class => 'text' %><br />
+    <span>
+      <%= link_to 'Add Group', add_task_group_path, :class => 'task_group_submit' %>
+      or
+      <%= link_to 'cancel', '#', :class => 'cancel_add_task' %>
+    </span>
+  </span>
+</p>
+
+<script type="text/javascript">
+  $("#task_title").focus();
+</script>

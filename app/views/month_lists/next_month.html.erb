@@ -1,0 +1,15 @@
+<%- if !@month_list.blank? -%>
+  <%= render :partial => 'list_details', :locals => {:month_list => @month_list} %>
+  
+  <p class="list_nav">
+    <%= link_to '&laquo; Previous Lists', previous_lists_path, :class => 'prev_month_link' %>
+    <%= link_to 'Current Month &raquo;', lists_path, :class => 'cur_month_link' %>
+  </p>
+  <div class="clear"></div>
+  
+  <script type="text/javascript">
+    reset_checkboxes();
+  </script>
+<%- else -%>
+  <p>Uh oh! There was an error getting your lists.</p>
+<%- end -%>

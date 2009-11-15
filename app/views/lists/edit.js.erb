@@ -1,0 +1,1 @@
+$("#list_notes_<%= @list.id %>").html('<%= escape_javascript(render(:partial => 'shared/list_details_form_update', :locals => {:format => :html, :list => @list})) %>');

@@ -161,7 +161,7 @@ label {
 }
 input.remember_me {
   float: left;
-  margin: 7px 5px 0 0;
+  margin: 12px 5px 0 0;
 }
 label.remember_me { float: left; }
 .ahover {
@@ -446,7 +446,11 @@ label.remember_me { float: left; }
   font-size: 16px;
   color: #a4a49f;
 }
-.list_form .list_input { width: 530px !important; }
+.list_form .list_input {
+  width: 530px !important;
+  font-size: 14px;
+  color: #333333;
+}
 .list_form_controls {
   float: right;
   display: inline;
@@ -593,18 +597,27 @@ label.remember_me { float: left; }
 .pagination a {
   padding: 2px 5px;
   margin: 2px;
-  border: 1px solid #666666;
+  border: 1px solid #1e9f24;
   text-decoration: none;
-  color: #666666;
+  color: #1e9f24;
   font-size: 1em !important;
 }
 .pagination a:active {
-  border: 1px solid #000000;
-  color: #000000;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  background-color: #1e9f24;
 }
 .pagination a:hover {
-  border: 1px solid #000000;
-  color: #000000;
+  border: 1px solid #1e9f24;
+  color: #ffffff;
+  background-color: #1e9f24;
+}
+.pagination .current {
+  padding: 2px 5px;
+  margin: 2px;
+  border: 1px solid #1e9f24;
+  color: #ffffff;
+  background-color: #1e9f24;
 }
 .pagination em {
   padding: 2px 5px;
@@ -618,6 +631,6 @@ label.remember_me { float: left; }
 .pagination .disabled {
   padding: 3px 5px;
   margin: 2px;
-  border: 1px solid #dddddd;
-  color: #999999;
+  border: 1px solid #8e8e8a;
+  color: #8e8e8a;
 }

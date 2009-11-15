@@ -1,0 +1,13 @@
+<h2>Registered Users</h2>
+
+<%- if !@users.blank? -%>
+  <table class="task_list" cellspacing="0" cellpadding="0">
+    <%- @users.each do |user| -%>
+      <tr>
+        <td><%=h user.name %></td>
+        <td>(<%= link_to pluralize(user.tasks.active.count, 'Task'), tasks_user_path(user) %>)</td>
+        <td><%= mail_to user.email %></td>
+      </tr>
+    <%- end -%>
+  </table>
+<%- end -%>

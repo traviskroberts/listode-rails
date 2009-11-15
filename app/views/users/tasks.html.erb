@@ -1,0 +1,16 @@
+<h2>Tasks For <%=h @user.name %></h2>
+
+<%- if !@tasks.blank? -%>
+  <table class="task_list" cellspacing="0" cellpadding="0">
+    <tr>
+      <th>Task</th>
+      <th>Task Group</th>
+    </tr>
+    <%- @tasks.each do |task| -%>
+      <tr>
+        <td><%=h task.title %></td>
+        <td><%=h task.task_group ? task.task_group.title : '' %></td>
+      </tr>
+    <%- end -%>
+  </table>
+<%- end -%>

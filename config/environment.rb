@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
 
   # Skip frameworks you're not going to use.
   config.frameworks -= [ :active_resource ]
-
-  # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-  config.time_zone = 'UTC'
 end
+
+# Site-wide variables
+FEEDBACK_EMAIL = 'feedback@listode.com'

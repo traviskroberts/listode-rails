@@ -1,0 +1,15 @@
+<% form_tag({:action => 'feedback'}) do %>
+  <p>
+    <label for="feedback_name">Name</label>
+    <%= text_field_tag 'feedback[name]', params[:feedback][:name], :class => 'formfield' %>
+  </p>
+  <p>
+    <label for="feedback_email">Email Address</label>
+    <%= text_field_tag 'feedback[email]', params[:feedback][:email], :class => 'formfield' %>
+  </p>
+  <p>
+    <label for="feedback_message">Feedback</label>
+    <%= text_area_tag 'feedback[message]', params[:feedback][:message], :size => '35x5', :class => 'formfield' %>
+  </p>
+  <p><%= image_submit_tag('btn_send_feedback.png', :alt => 'Send Feedback', :class => 'feedback_submit') %></p>
+<% end %>

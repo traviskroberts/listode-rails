@@ -4,9 +4,8 @@ class Task < ActiveRecord::Base
   belongs_to :user
   belongs_to :task_group
   
-  validates_presence_of :title
+  named_scope :active, :conditions => 'deleted_at IS NULL OR deleted_at > NOW()'
+  named_scope :ungrouped, :conditions => 'task_group_id IS NULL'
   
-  def self.active
-    all(:conditions => "(deleted_at IS NULL OR deleted_at > CURRENT_TIMESTAMP) AND task_group_id IS NULL")
-  end
+  validates_presence_of :title
 end

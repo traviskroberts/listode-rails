@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20091025184754) do
   create_table "task_groups", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
-    t.datetime "deleted_ad"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,21 @@
+<p><%= link_to '&raquo; Back to Tasks', tasks_path, :class => 'manage_tasks' %></p>
+
+<h2>Task Groups</h2>
+
+<%- if !@task_groups.blank? -%>
+  <table class="task_list" cellcpacing="0" cellpadding="0">
+    <%- @task_groups.each do |task_group| -%>
+      <tr id="<%= dom_id(task_group) %>">
+        <td><%=h task_group.title %></td>
+        <td class="actions_cell">
+          <%= link_to 'Edit', edit_task_group_path(:id => task_group), :class => "task_edit" %>
+          <%= link_to 'Delete', task_group_path(:id => task_group), :class => "task_group_delete remote-delete", :rel => 'Are you sure you want to delete this task group? All associated tasks will also be deleted.' %>
+        </td>
+      </tr>
+    <%- end -%>
+  </table>
+  
+  <p><%= link_to 'Add another task group &raquo;', new_task_group_path, :class => 'task_group_add' %></p>
+<%- else -%>
+  <p class="nonefound">There are no task groups at this time. <%= link_to 'Create the first task group.', new_task_group_path %></p>
+<%- end -%>

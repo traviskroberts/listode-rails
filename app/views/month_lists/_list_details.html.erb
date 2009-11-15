@@ -1,0 +1,50 @@
+<h2>List for <%= "#{month_name(month_list.month)} #{month_list.year}" %></h2>
+
+<%- month_list.cur_ungrouped_lists.each do |list| -%>
+  <div class="list_item" id="list_title_<%= list.id %>">
+    <span id="list_status_<%= list.id %>" class="list_checkbox">
+      <%- if list.complete -%>
+        <%= link_to image_tag('checked.png', :alt => "&#x2714;"), uncomplete_task_list_path(:id => list), :class => 'checked uncomplete_confirm' %>
+      <%- else -%>
+        <%= check_box_tag :complete, 1, false, :id => "complete_#{list.id}", :onclick => "toggle_list_notes('#{list.id}', 'checkbox');" %>
+      <%- end -%>
+    </span>
+    <span class="<%= list.complete ? 'completed_list_title' : 'list_title' %>">
+      <%=h list.task.title %>
+      <%= link_to(image_tag('edit.png', :alt => 'edit'), edit_list_path(:id => list), :class => 'remote action_img') if list.complete %>
+    </span>
+    <div class="clear"></div>
+  </div>
+  <%- if list.complete -%>
+    <%= list.amount_and_notes %>
+  <%- else -%>
+    <%= render :partial => 'shared/list_details_form_new', :locals => {:list => list} %>
+  <%- end -%>
+<%- end -%>
+
+<%- cur_group = nil -%>
+<%- month_list.cur_grouped_lists.each do |list| -%>
+  <%- if list.task.task_group_id != cur_group -%>
+    <h3 class="group_title"><%=h list.task.task_group.title %></h3>
+    <%- cur_group = list.task.task_group_id -%>
+  <%- end -%>
+  <div class="list_item" id="list_title_<%= list.id %>">
+    <span class="list_checkbox" id="list_status_<%= list.id %>">
+      <%- if list.complete -%>
+        <%= link_to image_tag('checked.png', :alt => '&#x2714;'), uncomplete_task_list_path(:id => list), :class => 'checked uncomplete_confirm' %>
+      <%- else -%>
+        <%= check_box_tag 'complete', 1, false, :id => "complete_#{list.id}", :onclick => "toggle_list_notes('#{list.id}', 'checkbox');" %>
+      <%- end -%>
+    </span>
+    <span class="<%= list.complete ? 'completed_list_title' : 'list_title' %>"><%=h list.task.title %></span>
+    <%- if list.complete -%>
+      <%= link_to image_tag('edit.png', :alt => 'edit'), edit_list_path(:id => list), :class => 'remote action_img' %>
+    <%- end -%>
+  </div>
+  <div class="clear"></div>
+  <%- if list.complete -%>
+    <%= list.amount_and_notes %>
+  <%- else -%>
+    <%= render :partial => 'shared/list_details_form_new', :locals => {:list => list} %>
+  <%- end -%>
+<%- end -%>

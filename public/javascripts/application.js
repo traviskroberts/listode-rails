@@ -1,45 +1,34 @@
-// Common JavaScript code across your application goes here.
-
-// function to send a jQuery object via AJAX
-jQuery.fn.submitFormWithAjax = function() {
-  this.submit(function() {
-    $.post(this.action + '.js', $(this).serialize(), null, "script");
-    return false;
-  })
-  return this;
-};
-
-jQuery.fn.submitLinkWithAjax = function() {
-  this.click(function() {
-    $.get(this.href + '.js', null, null, "script");
-  	return false;
-  })
-};
-
-
 $(document).ready(function() {
   // make forms with the class "remote" submit via AJAX
-  $("form.remote").submitFormWithAjax();
+  $("form.remote").live('submit', function() {
+    $.post(this.action + '.js', $(this).serialize(), null, "script");
+    return false;
+  });
   
 	// make links with the class "remote" submit via AJAX (but only in Firefox)
-	if($.browser.mozilla){ $('a.remote').submitLinkWithAjax(); }
-	
-	// Confirm dialog for delete records
-	$('.task_delete').click(function() {
-		var answer = confirm('Are you sure you want to delete this task?');
-		return answer;
+	$('a.remote').live('click', function() {
+	  $.get(this.href + '.js', null, null, "script");
+  	return false;
 	});
 	
-	// Confirm dialog for deleting task groups
-	$('.task_group_delete').click(function() {
-		var answer = confirm('Are you sure you want to delete this task group? All associated tasks will also be deleted.');
-		return answer;
-	});
+  // 
+	$('a.remote-delete').live('click', function() {
+	  if(this.rel) {
+	    if(confirm(this.rel)) {
+	      $.post(this.href, { _method: 'delete' }, null, "script");
+	    }
+	  } else {
+	    $.post(this.href, { _method: 'delete' }, null, "script");
+	  }
+    return false;
+  });
 	
 	// Confirm dialog for marking a task as uncomplete
-	$('.uncomplete_confirm').click(function() {
-		var answer = confirm('Are you sure you want to mark this item as incomplete? Your amount/notes will be erased as well.');
-		return answer;
+	$('.uncomplete_confirm').live('click', function() {
+		if(confirm('Are you sure you want to mark this item as incomplete? Your amount/notes will be erased as well.')) {
+		  return true;
+		}
+		return false;
 	});
 	
   // hover effect for navigation
@@ -49,22 +38,22 @@ $(document).ready(function() {
   $('#header .logolink').ahover({toggleEffect: 'width', toggleSpeed: 150});
   
   // show add task form
-  $('a.add_task_link').click(function() {
+  $('a.add_task_link').live("click", function() {
     $('#task_group_select').hide();
     $('#task_group_form').show();
     return false;
   })
   
   // hide add task form
-  $('a.cancel_add_task').click(function() {
+  $('a.cancel_add_task').live('click', function() {
     $('#task_group_select').show();
     $('#task_group_form').hide();
     return false;
   })
   
   // submit add task form
-  $('a.task_group_submit').click(function() {
-    this.href = this.href + "?title=" + $('#task_group_title').attr("value");
+  $('a.task_group_submit').live('click', function() {
+    this.href = this.href + '?title=' + $('#task_group_title').attr("value");
   })
 });
 

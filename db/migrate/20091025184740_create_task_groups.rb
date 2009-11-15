@@ -3,7 +3,7 @@ class CreateTaskGroups < ActiveRecord::Migration
     create_table :task_groups do |t|
       t.integer   :user_id
       t.string    :title
-      t.datetime  :deleted_ad
+      t.datetime  :deleted_at
       t.timestamps
     end
     

@@ -1,0 +1,10 @@
+<h2>Edit Task</h2>
+
+<% form_for @task, :url => task_path(:id => @task), :html => {:method => 'put'} do |f| -%>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  <p class="task_actions">
+    <%= image_submit_tag 'btn_update.png', :alt => 'Create Task', :class => 'task_update' %>
+    of
+    <%= link_to 'cancel', tasks_path %>
+  </p>
+<% end -%>

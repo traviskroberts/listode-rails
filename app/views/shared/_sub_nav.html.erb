@@ -1,0 +1,17 @@
+<ul class="tabbed_list">
+  <%- if @current_controller == 'user_sessions' and @current_action == 'new' -%>
+    <li class="current"><%= link_to 'Login', login_path %></li>
+  <%- elsif @current_action == 'about' -%>
+    <li class="current"><%= link_to 'About', about_path %></li>
+  <%- elsif @current_controller == 'users' and @current_action == 'new' -%>
+    <li class="current"><%= link_to 'Sign Up', new_user_path %></li>
+  <%- elsif @current_controller == 'users' and %w(index edit).include?(@current_action) -%>
+    <li class="current"><%= link_to 'My Account', my_account_path %></li>
+  <%- elsif @current_action == 'feedback' -%>
+    <li class="current"><%= link_to 'Feedback', feedback_path %></li>
+  <%- elsif %w(month_lists tasks task_groups statistics).include?(@current_controller) -%>
+    <li class="<%= @current_controller == 'month_lists' ? 'current' : '' %>"><%= link_to 'Lists', lists_path %></li>
+    <li class="<%= @current_controller == 'tasks' ? 'current' : '' %>"><%= link_to 'Tasks', tasks_path %></li>
+    <li class="<%= @current_controller == 'statistics' ? 'current' : '' %>"><%= link_to 'Statistics', statistics_path %></li>
+  <%- end -%>
+</ul>

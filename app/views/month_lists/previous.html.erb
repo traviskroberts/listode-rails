@@ -1,0 +1,19 @@
+<h2>Previous Lists</h2>
+
+<%- if !@month_lists.blank? -%>
+  <ul class="previous_lists">
+    <%- @month_lists.each do |month_list| -%>
+      <li>
+        <%= link_to "#{month_name(month_list.month)} #{month_list.year}", past_list_path(:year => month_list.year, :month => month_list.month) %>
+      </li>
+    <%- end -%>
+  </ul>
+  
+  <%= will_paginate @month_lists %>
+  
+  <p class="list_nav">
+    <%= link_to 'Current Month &raquo;', lists_path, :class => 'cur_month_link' %>
+  </p>
+  
+  <div class="clear"></div>
+<%- end -%>

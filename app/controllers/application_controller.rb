@@ -7,6 +7,24 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
+  before_filter :set_globals
+  
+  def set_globals
+    @current_controller = controller_name
+    @current_action = action_name
+  end
+  
+  def sanitize_amount(amount='')
+    amount.gsub(/[^0-9+\.]/, '')
+  end
+  
+  def get_next_month_and_year
+    month = Date.today.month
+    year = Date.today.year
+    @next_month = month==12 ? 1 : month+1
+    @next_year = month==12 ? year+1 : year
+  end
+  
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
@@ -31,6 +49,14 @@ class ApplicationController < ActionController::Base
       if current_user
         store_location
         flash[:notice] = "You must be logged out to access this page"
+        redirect_to root_path
+        return false
+      end
+    end
+    
+    def require_admin
+      if !current_user or !current_user.admin
+        flash[:error] = "You don't have access to that page!"
         redirect_to root_path
         return false
       end

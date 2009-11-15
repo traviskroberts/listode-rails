@@ -1,0 +1,10 @@
+<p>
+  <%= image_tag gravatar_url_for(current_user.email), :alt => 'Gravatar image', :class => 'gravatar' %>
+  <strong><%= current_user.name %></strong><br />
+  Member since: <%= current_user.member_since_date if !current_user.member_since.blank? %><br />
+  Monthly Reminders: <strong><%= current_user.task_reminder ? 'on' : 'off' %></strong>
+</p>
+
+<div class="clear"></div>
+
+<p><%= link_to 'Edit Your Account', edit_my_account_path %></p>

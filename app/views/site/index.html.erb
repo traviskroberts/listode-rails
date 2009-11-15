@@ -1,2 +1,10 @@
-<h1>Site#index</h1>
-<p>Find me in app/views/site/index.html.erb</p>
+<%- @homepage = true -%>
+
+<%= image_tag('home_list.png', :class => 'home_list_img', :alt => 'home image') %>
+
+<div class="home_content">
+  <p class="intro">
+    Have recurring monthly tasks or expenses? <span class="listode">Listode</span> is the simple way to track them!
+  </p>
+  <p><%= link_to 'Get Started', new_user_path, :class => 'get_started' %></p>
+</div><!-- home -->

@@ -1,10 +1,8 @@
 class TaskGroup < ActiveRecord::Base
-  has_many :tasks
+  has_many :tasks, :conditions => "deleted_at IS NULL OR deleted_at > NOW()"
   belongs_to :user
   
-  validates_presence_of :title
+  named_scope :active, :conditions => "deleted_at IS NULL OR deleted_at > NOW()"
   
-  def self.active
-    all(:conditions => "deleted_at IS NULL OR deleted_at > CURRENT_TIMESTAMP")
-  end
+  validates_presence_of :title
 end

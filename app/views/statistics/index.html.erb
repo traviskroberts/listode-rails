@@ -1,0 +1,13 @@
+<%- if !@tasks.blank? -%>
+  <h2>Choose a task to see statistics</h2>
+  
+  <ul class="stats_list">
+    <%- @tasks.each do |task| -%>
+      <li><%= link_to h(task.title), statistics_detail_path(:id => task, :title => strip_chars(task.title)) %></li>
+    <%- end -%>
+  </ul>
+<%- else -%>
+  <h2>Statistics</h2>
+  
+  <p>You don't have any tasks at this time.</p>
+<%- end -%>

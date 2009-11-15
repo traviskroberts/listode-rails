@@ -1,0 +1,20 @@
+<h2>Edit List Item</h2>
+
+<% form_for @list do |f| %>
+  <h3 class="task_title"><%=h @list.task.title %></h3>
+  <p>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </p>
+  <p>
+    <%= f.label :notes %>
+    <%= f.text_field :notes %>
+  </p>
+  <p class="list_form_controls" style="float:none;">
+    <%= image_submit_tag 'btn_update.png', :alt => 'Update', :class => 'update_button' %>
+    or
+    <%= link_to 'cancel', request.env["HTTP_REFERER"] %>
+  </p>
+<% end %>
+
+<div class="clear"></div>

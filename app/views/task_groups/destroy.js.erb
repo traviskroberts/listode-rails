@@ -1,0 +1,5 @@
+<%- if @js_result and @js_result == 'success' -%>
+  $("#<%= dom_id(@task_group) %>").remove();
+<%- else -%>
+  alert("There was an error deleting that task group.");
+<%- end -%>

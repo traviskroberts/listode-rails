@@ -1,0 +1,2 @@
+$('#notes_<%= @list.id %>').replaceWith('');
+$('#list_title_<%= @list.id %>').after('<%= escape_javascript(@list.amount_and_notes) %>');
