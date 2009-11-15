@@ -7,10 +7,6 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  # Settings in config/environments/* take precedence over those specified here.
-  # Application configuration should go into files in config/initializers
-  # -- all .rb files in that directory are automatically loaded.
-
   # Specify gems that this application depends on and have them installed with rake gems:install
   config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
   config.gem 'less', :source => 'http://gemcutter.org'
