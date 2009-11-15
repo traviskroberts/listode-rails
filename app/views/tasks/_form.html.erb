@@ -6,7 +6,7 @@
 <p>
   <span id="task_group_select">
     <%= f.label :task_group_id, 'Task Group' %>
-    <%= f.select :task_group_id, options_for_select(@task_groups), {:include_blank => true}, :class => 'task_group_select' %>
+    <%= f.select :task_group_id, @task_groups, {:include_blank => true}, :class => 'task_group_select' %>
     <%= link_to 'add task group', new_task_group_path, :class => 'add_task_link' %>
   </span>
   <span id="task_group_form" style="display:none;">
