@@ -1,5 +1,8 @@
 <%- if !@month_list.blank? -%>
-  <h2>Choose a task to see statistics</h2>
+  
+  <%= monthly_spending_graph(@all_lists) %>
+  
+  <h2>Choose an individual task to see statistics</h2>
   
   <ul class="stats_list">
     <%- @month_list.cur_ungrouped_lists.each do |list| -%>
