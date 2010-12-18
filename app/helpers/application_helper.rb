@@ -15,6 +15,11 @@ module ApplicationHelper
     labels = []
     amounts = []
     
+    # we only need that last 12 entries (if there are more than that)
+    if month_lists.length > 12
+      month_lists = month_lists.reverse[0..11].reverse
+    end
+    
     month_lists.each do |month_list|
       labels << "#{month_list.month_name[0..2]}+#{month_list.year}"
       amounts << month_list.lists.sum(:amount)
@@ -56,8 +61,7 @@ module ApplicationHelper
     lists = List.find(:all,
                       :include => :month_list,
                       :conditions => ["lists.complete = ? AND lists.amount IS NOT NULL AND lists.task_id = ?", true, task.id],
-                      :order => 'month_lists.year, month_lists.month',
-                      :limit => 12)
+                      :order => 'month_lists.year, month_lists.month')
     
     # don't bother if there isn't enough info for a graph
     return "<p>Not enough info for a graph.</p>" if lists.blank?
@@ -65,8 +69,10 @@ module ApplicationHelper
     # get the task title
     title = task.title.gsub(/\s+/,'+')
     
-    # sort the items
-    lists = lists.sort_by { |list| "#{list.month_list.year}#{list.month_list.month}" }
+    # we only need that last 12 entries (if there are more than that)
+    if lists.length > 12  
+      lists = lists.reverse[0..11].reverse
+    end
     
     # get the amounts of each item
     amounts = lists.map { |i| i.amount }
@@ -76,7 +82,7 @@ module ApplicationHelper
     lists.each { |list| labels << "#{list.month_list.month_name[0..2]}+#{list.month_list.year}"}
     
     # we need at least 12 values/labels for the graph to work
-    if amounts.length < 13
+    if amounts.length < 12
       (12 - amounts.length).downto(1) do |x|
         amounts.insert(0,0)
         labels.insert(0,'-')
