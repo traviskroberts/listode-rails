@@ -1,9 +1,9 @@
 <%- if !@month_list.blank? -%>
-  
-  <%= monthly_spending_graph(@all_lists) %>
-  
+
+  <%= monthly_spending_graph(@all_lists).html_safe %>
+
   <h2>Choose an individual task to see statistics</h2>
-  
+
   <ul class="stats_list">
     <%- @month_list.cur_ungrouped_lists.each do |list| -%>
       <li><%= link_to h(list.task.title), statistics_detail_path(:id => list.task, :title => strip_chars(list.task.title)) %></li>
@@ -22,6 +22,6 @@
   <%- end -%>
 <%- else -%>
   <h2>Statistics</h2>
-  
+
   <p>You don't have any tasks at this time.</p>
 <%- end -%>

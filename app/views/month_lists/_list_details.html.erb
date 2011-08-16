@@ -16,7 +16,7 @@
     <div class="clear"></div>
   </div>
   <%- if list.complete -%>
-    <%= list.amount_and_notes %>
+    <%= list.amount_and_notes.html_safe %>
   <%- else -%>
     <%= render :partial => 'shared/list_details_form_new', :locals => {:list => list} %>
   <%- end -%>
@@ -43,7 +43,7 @@
   </div>
   <div class="clear"></div>
   <%- if list.complete -%>
-    <%= list.amount_and_notes %>
+    <%= list.amount_and_notes.html_safe %>
   <%- else -%>
     <%= render :partial => 'shared/list_details_form_new', :locals => {:list => list} %>
   <%- end -%>
