@@ -1,5 +1,5 @@
 <div class="list_form">
-  <% form_for list do |f| -%>
+  <%= form_for list do |f| -%>
     <p id="notes_<%= list.id %>">
       <%= f.label :amount %>
       <%= f.text_field :amount, :id => "amount_field_#{list.id}", :class => 'list_input' %>

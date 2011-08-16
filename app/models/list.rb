@@ -1,9 +1,9 @@
 class List < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
-  
+
   belongs_to :task
   belongs_to :month_list
-  
+
   def amount_and_notes
     output = "<div id=\"list_notes_#{self.id}\">"
     if !amount.blank? and !notes.blank?

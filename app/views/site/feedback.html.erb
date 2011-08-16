@@ -1,4 +1,4 @@
-<% form_tag({:action => 'feedback'}) do %>
+<%= form_tag({:action => 'feedback'}) do %>
   <p>
     <label for="feedback_name">Name</label>
     <%= text_field_tag 'feedback[name]', params[:feedback][:name], :class => 'formfield' %>

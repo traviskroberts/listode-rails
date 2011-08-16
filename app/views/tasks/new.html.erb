@@ -1,6 +1,6 @@
 <h2>Add New Task</h2>
 
-<% form_for @task do |f| -%>
+<%= form_for @task do |f| -%>
   <%= render :partial => 'form', :locals => {:f => f} %>
   <p class="task_actions">
     <%= image_submit_tag 'btn_create_task.png', :alt => 'Create Task', :class => 'task_create' %>

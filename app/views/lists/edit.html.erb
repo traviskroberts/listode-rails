@@ -1,6 +1,6 @@
 <h2>Edit List Item</h2>
 
-<% form_for @list do |f| %>
+<%= form_for @list do |f| %>
   <h3 class="task_title"><%=h @list.task.title %></h3>
   <p>
     <%= f.label :amount %>

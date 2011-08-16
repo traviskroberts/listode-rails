@@ -1,6 +1,6 @@
 <h2>Edit Task Group</h2>
 
-<% form_for :task_group, :url => task_group_path(:id => @task_group), :html => {:method => 'put'} do |f| -%>
+<%= form_for :task_group, :url => task_group_path(:id => @task_group), :html => {:method => 'put'} do |f| -%>
   <%= render :partial => 'form', :locals => {:f => f} %>
   <p class="task_actions">
     <%= image_submit_tag 'btn_update.png', :alt => 'Update', :class => 'task_update' %>

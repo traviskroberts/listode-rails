@@ -2,9 +2,9 @@ class MonthList < ActiveRecord::Base
   has_many :lists
   has_many :tasks, :through => :lists
   belongs_to :user
-  
+
   validates_presence_of :month
-  
+
   MONTHS = {
     1 => 'January',
     2 => 'February',
@@ -19,7 +19,7 @@ class MonthList < ActiveRecord::Base
     11 => 'November',
     12 => 'December'
   }
-  
+
   def cur_ungrouped_lists
     list_arr = []
     month = self.month > 9 ? self.month : "0#{self.month}"
@@ -29,7 +29,7 @@ class MonthList < ActiveRecord::Base
     end
     list_arr
   end
-  
+
   def cur_grouped_lists
     list_arr = []
     month = self.month > 9 ? self.month : "0#{self.month}"
@@ -39,11 +39,11 @@ class MonthList < ActiveRecord::Base
     end
     list_arr.sort_by { |l| l.task.task_group_id }
   end
-  
+
   def ordered_lists
     self.lists.all(:order => [:complete])
   end
-  
+
   def month_name
     MONTHS[self.month][0..2]
   end

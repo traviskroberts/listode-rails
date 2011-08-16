@@ -1,43 +1,40 @@
-ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'site'
-  
-  map.about 'about', :controller => 'site', :action => 'about'
-  map.feedback 'feedback', :controller => 'site', :action => 'feedback'
-  
-  # routes for lists
-  map.with_options :controller => 'month_lists' do |m|
-    m.lists 'list/current', :action => 'index'
-    m.generate_list 'list/generate', :action => 'generate'
-    m.next_month 'list/nex-month', :action => 'next_month'
-    m.previous_lists 'list/previous', :action => 'previous'
-    m.past_list 'list/:year/:month', :action => 'past'
-  end
-  
-  # routes for my-account
-  map.with_options :controller => 'users' do |m|
-    m.my_account 'my-account', :action => 'index'
-    m.edit_my_account 'my-acount/edit', :action => 'edit'
-  end
-  
-  # routes for statistics
-  map.with_options :controller => 'statistics' do |m|
-    m.statistics 'statistics', :action => 'index'
-    m.statistics_detail 'statistics/show/:id/:title', :action => 'show', :title => nil
-  end
-  
-  map.add_task_group 'task_groups/add_task_group', :controller => 'task_groups', :action => 'add_task_group'
-  
-  map.login 'login', :controller => 'user_sessions', :action => 'new'  
-  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'  
-  
-  map.resources :lists, :member => {:complete_task => :post, :uncomplete_task => :get, :cancel_edit => :get}
-  map.resources :task_groups
-  map.resources :tasks
-  map.resources :statistics
-  map.resources :user_sessions
-  map.resources :users, :collection => {:list => :get}, :member => {:tasks => :get}
+Listode::Application.routes.draw do
+  root :to => 'site#index'
 
-  # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  # generic site routes
+  match 'about' => 'site#about', :as => 'about'
+  match 'feedback' => 'site#feedback', :as => 'feedback'
+
+  match 'list/current'      => 'month_lists#index',       :as => 'lists'
+  match 'list/generate'     => 'month_lists#generate',    :as => 'generate_list'
+  match 'list/nex-month'    => 'month_lists#next_month',  :as => 'next_month'
+  match 'list/previous'     => 'month_lists#previous',    :as => 'previous_lists'
+  match 'list/:year/:month' => 'month_lists#past',        :as => 'past_list'
+
+  match 'my-account'      => 'users#index', :as => 'my_account'
+  match 'my-account/edit' => 'users#edit',  :as => 'edit_my_account'
+
+  match 'statistics'                    => 'statistics#index',  :as => 'statistics'
+  match 'statistics/show/:id(/:title)'  => 'statistics#show',   :as => 'statistics_detail'
+
+  match 'task_groups/add_task_group' => 'task_groups#add_task_group', :as => 'add_task_group'
+
+  match 'login'   => 'user_sessions#new',     :as => 'login'
+  match 'logout'  => 'user_sessions#destroy', :as => 'logout'
+
+  resources :lists do
+    member do
+      post 'complete_task'
+      get 'uncomplete_task'
+      get 'cancel_edit'
+    end
+  end
+  resources :task_groups
+  resources :tasks
+  resources :statistics
+  resources :user_sessions
+  resources :users do
+    get 'list', :on => :collection
+    get 'task', :on => :member
+  end
 end
