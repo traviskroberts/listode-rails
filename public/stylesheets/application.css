@@ -426,6 +426,13 @@ label.remember_me { float: left; }
   margin: 0;
   padding: 0 0 10px 42px;
 }
+.list_note {
+  font-size: 14px;
+  line-height: 100%;
+  color: #8e8e8a;
+  margin: 0;
+  padding: 0 0 10px 42px;
+}
 .list_checkbox {
   float: left;
   width: 30px;

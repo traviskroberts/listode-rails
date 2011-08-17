@@ -7,7 +7,8 @@ class List < ActiveRecord::Base
   def amount_and_notes
     output = "<div id=\"list_notes_#{self.id}\">"
     if !amount.blank? and !notes.blank?
-      output << "<p class=\"list_details\">Paid #{number_to_currency(amount)}<br />#{notes.gsub("\n",'<br />')}</p>"
+      output << "<p class=\"list_details\">Paid #{number_to_currency(amount)}</p>"
+      output << "<p class=\"list_note\">#{notes.gsub("\n",'<br />')}</p>"
     elsif !amount.blank?
       output << "<p class=\"list_details\">Paid #{number_to_currency(amount)}</p>"
     elsif !notes.blank?
