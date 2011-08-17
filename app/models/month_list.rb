@@ -37,7 +37,7 @@ class MonthList < ActiveRecord::Base
     self.ordered_lists.each do |l|
       list_arr << l if ((l.task.deleted_at.blank? or l.task.deleted_at >= date) and !l.task.task_group.blank?)
     end
-    list_arr.sort_by { |l| l.task.task_group_id }
+    list_arr.sort_by { |l| [l.task.task_group_id, l.complete ? 1 : 0] }
   end
 
   def ordered_lists
