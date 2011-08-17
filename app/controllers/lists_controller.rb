@@ -1,10 +1,10 @@
 class ListsController < ApplicationController
   before_filter :require_user
-  
+
   def index
     redirect_to lists_path
   end
-  
+
   def complete_task
     @list = List.find(params[:id])
     # check to make sure it belongs to the right user
@@ -17,7 +17,7 @@ class ListsController < ApplicationController
     end
     redirect_to request.env["HTTP_REFERER"] # send them back
   end
-  
+
   def uncomplete_task
     @list = List.find(params[:id])
     # check to make sure it belongs to the right user
@@ -28,7 +28,7 @@ class ListsController < ApplicationController
     end
     redirect_to request.env["HTTP_REFERER"] # send them back
   end
-  
+
   def edit
     @list = List.find(params[:id])
     respond_to do |format|
@@ -52,7 +52,7 @@ class ListsController < ApplicationController
     else
       flash[:error] = "You don't have permission to update that list item."
     end
-    
+
     # return them to the correct page
     if session[:edit_link]
       target = session[:edit_link].dup
@@ -62,7 +62,7 @@ class ListsController < ApplicationController
       redirect_to request.env["HTTP_REFERER"]
     end
   end
-  
+
   def cancel_edit
     @list = List.find(params[:id])
     respond_to do |format|
@@ -70,5 +70,5 @@ class ListsController < ApplicationController
       format.js
     end
   end
-  
+
 end

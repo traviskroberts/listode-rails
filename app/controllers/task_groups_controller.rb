@@ -19,8 +19,8 @@ class TaskGroupsController < ApplicationController
 
   def create
     # try to find the task group if its been marked as deleted and un-delete it
-    if current_user.task_groups.first(:conditions => {:title => params[:task_group][:title]})
-      @task_group = current_user.task_groups.first(:conditions => {:title => params[:task_group][:title]})
+    if current_user.task_groups.where("title = ?", params[:task_group][:title]).first
+      @task_group = current_user.task_groups.where("title = ?", params[:task_group][:title]).first
       @task_group.deleted_at = nil
     else
       @task_group = current_user.task_groups.new(params[:task_group])
