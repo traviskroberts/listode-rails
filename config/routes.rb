@@ -35,6 +35,6 @@ Listode::Application.routes.draw do
   resources :user_sessions
   resources :users do
     get 'list', :on => :collection
-    get 'task', :on => :member
+    get 'tasks', :on => :member
   end
 end
