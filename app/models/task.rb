@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
-  has_many :lists
-  has_many :month_lists, :through => :lists
+  has_many :lists, :dependent => :destroy
+  has_many :month_lists, :through => :lists, :dependent => :destroy
   belongs_to :user
   belongs_to :task_group
 

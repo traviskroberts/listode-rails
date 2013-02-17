@@ -1,6 +1,6 @@
 class MonthList < ActiveRecord::Base
-  has_many :lists
-  has_many :tasks, :through => :lists
+  has_many :lists, :dependent => :destroy
+  has_many :tasks, :through => :lists, :dependent => :destroy
   belongs_to :user
 
   validates_presence_of :month
