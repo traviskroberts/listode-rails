@@ -6,10 +6,6 @@ class TasksController < ApplicationController
     @unfiled_tasks = current_user.tasks.active.ungrouped
   end
 
-  def show
-    @task = current_user.tasks.get(params[:id])
-  end
-
   def new
     @task = current_user.tasks.new
     @task_groups = current_user.task_groups.active.collect { |g| [g.title, g.id] }
@@ -22,8 +18,8 @@ class TasksController < ApplicationController
 
   def create
     # try to find the task if its been marked as deleted and un-delete it (don't want them re-creating a deleted task)
-    if current_user.tasks.where("title = ?", params[:task][:title]).first
-      @task = current_user.tasks.where("title = ?", params[:task][:title]).first
+    @task = current_user.tasks.where("title = ?", params[:task][:title]).first
+    if @task.present?
       @task.deleted_at = nil
     else
       @task = current_user.tasks.new(params[:task])

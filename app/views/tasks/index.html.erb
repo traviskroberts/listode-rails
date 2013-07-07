@@ -18,10 +18,10 @@
 
 <%- if !@task_groups.blank? -%>
   <%- @task_groups.each do |task_group| -%>
-    <%- next if task_group.tasks.blank? -%>
+    <%- next if task_group.tasks.active.blank? -%>
     <h3><%=h task_group.title %></h3>
     <table class="task_list" cellspacing="0" cellpadding="0">
-      <%- task_group.tasks.each do |task| -%>
+      <%- task_group.tasks.active.each do |task| -%>
         <tr id="<%= dom_id(task) %>">
           <td><%=h task.title %></td>
           <td class="actions_cell">
